@@ -1,0 +1,56 @@
+Student
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+contract StudentData {
+// Structure to represent a student
+struct Student {
+uint256 studentId;
+string name;
+uint256 age;
+}
+// Array to store student records
+Student[] public students;
+// Fallback function to receive ether (transaction value)
+receive() external payable {
+// Do something with the received ether
+}
+// Function to add a new student
+function addStudent(uint256 _studentId, string memory _name, uint256 _age) public {
+Student memory newStudent = Student(_studentId, _name, _age);
+students.push(newStudent);
+}
+// Function to get the total number of students
+function getStudentCount() public view returns (uint256) {
+return students.length;
+}
+// Function to get student details by index
+function getStudent(uint256 index) public view returns (uint256, string memory,
+uint256) {
+require(index < students.length, "Invalid index");
+Student storage student = students[index];
+return (student.studentId, student.name, student.age);
+}
+}
+
+Bank
+// SPDX-License-Identifier: MIT
+pragma solidity 0.4.25;
+contract Bank{
+int bal;
+constructor() public
+{
+bal=1;
+}
+function getBalance() public view returns(int)
+{
+return bal;
+}
+function withdraw(int amt) public
+{
+bal=bal-amt;
+}
+function deposit(int amt) public
+{
+bal=bal+amt;
+}
+}
